@@ -327,10 +327,11 @@ def post(url, data):
     #
     # Add neo4j HTTP Basic Auth header
     #
-    # neo4j_user = current_app.rz_config.neo4j_user
+    neo4j_user="neo4j"# neo4j_user = current_app.rz_config.neo4j_user
+    neo4j_pw="neo4j"# 
     # neo4j_pw = current_app.rz_config.neo4j_pw
     # user_pw_base64 = base64.encodestring('%s:%s' % (neo4j_user, neo4j_pw))
-    # req.add_header('Authorization', 'Basic ' + user_pw_base64)  # enable neo4j JSON streaming
+    req.add_header('Authorization', 'Basic ' +"bmVvNGo6bmVvNGo=" )#req.add_header('Authorization', 'Basic ' + user_pw_base64)  # enable neo4j JSON streaming
 
     try:
         ret = request.urlopen(req, post_data_json)
