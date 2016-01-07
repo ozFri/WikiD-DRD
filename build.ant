@@ -154,7 +154,7 @@
       <parallel>
 
          <!-- requires default fragment rsync to have finished -->
-         <generate_version_tag outputdir="${fragment_d_path}/template.d" />
+         <generate_version_tag outputdir="${fragment_d_path}/WikiD" />
 
          <replaceregexp file="${deploy_target_dir}/static/js/app.js">
             <regexp pattern="\$\{fragment_d_path\}" />

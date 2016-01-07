@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ rz_config__rzdoc_cur__name|safe }} -- WikiD Wicked Problem Solver{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<h1 style="text-align:center; font-family:serif;">
+    WikiD
+</h1>
+  <div class="graph-view">
+    <div id="left-column-container">
+        <div class="input-container" id="input-container__graph-input">
+                <div contentEditable="true" tabindex="2" class="input input-bar" id="textanalyser" placeholder="Add to map" autofocus ></div>
+                <button tabindex="-1" id="btn_add" class="btn_input_submit">AN</button>
+                <div id="input-suggestion" class="suggestion" style="display: none"></div>
+                <p class="input-help-text"> Use double-space to connect nodes together. Type:<i><span class="analyser-span-node"> John </span>[double-space]<span class="analyser-span-link">  knows </span>[double-space]<span class="analyser-span-node">  Karate</span></p></i>
+        </div>
+    </div>
+    <div class="info-container" style="display:none">
+       <div id="editbox-closebutton" class="noselect" style="float: right">X</div>
+       <div id="editbox">
+         <p class="info-card-message"></p>
+         <div class="info-container__row" id="type">
+           <div class="info-card-attr">Type</div>
+           <select id="edittype" class="select-dropdown">
+           </select>
+         </div>
+         <div class="info-container__row" id="status" style="display:none">
+           <div class="info-card-attr">Status</div>
+           <select id="editstatus" style="display:none">
+             <option value="waiting">Waiting</option>
+             <option value="approved">Approved</option>
+             <option value="notapproved">Not Approved</option>
+           </select>
+           <span class="info-card-attr" id="displaystatus"></span>
+         </div>
+       </div>
+    </div>
+    <div id="graph-view__canvas"></div>
+    <div class="type_selection" style="display:none; width:400px; top: 20px">
+      <div class="type_selection__row" id="type_selection__intro">Change node type with <span class="kbd-button">Shift</span>+<span class="kbd-button">Up</span> and <span class="kbd-button">Shift</span>+<span class="kbd-button">Down</span></div>
+      <div class="type_selection__row" id="type_selection__chosen_type_label">Current Type: <span id="type_selection__chosen_type_name"/></div>
+      <div class="type_selection__row" id="type_selection__chosen_type_desc"></div>
+    </div>
+   </div>
+{% endblock %}
+{% block content_scripts %}
+<script type="text/javascript">
+var rz_config = { // set as a global variable
+    'backend_enabled': true,
+    'backend__maintain_ws_connection': true,
+    'role_set': {{ rz_config__role_set|safe }},
+    'feedback_url': '/feedback',
+    'node_edge_separator': true,
+    'optimized_main': {{ rz_config__optimized_main }},
+    'rand_id_generator' : 'hash',
+    'rzdoc_cur__name': "{{ rz_config__rzdoc_cur__name|safe }}",
+    'rzdoc__mainpage_name': '{{ rz_config__rzdoc__mainpage_name }}',
+    'separator_string': '  ',
+}
+
+var RZ_VERSION = '{% include "version.txt" %}';
+</script>
+<script type="text/javascript" data-main='/static/js/app.js' src="/static/lib/require.js"></script>
+{% endblock %};

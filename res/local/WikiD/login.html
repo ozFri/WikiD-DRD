@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Welcome to Rhizi{% endblock %}
+{% block head %}
+{{ super() }}
+<script src="/static/lib/jquery.js" type="text/javascript"></script>
+
+<style type="text/css">
+html {
+  background: url(/static/img/login-background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="welcome-box">
+	<div class="login-view-section">
+		<a href="{{ rzhome__logo_file_link }}">
+			<img class="login-logo" src="/static/img/{{ rzhome__logo_file | safe }}" />
+		</a>
+	</div>
+	<div class="login-view-section">
+		<h1 class="login-header">Welcome to Rhizi</h1>
+	</div>
+	<div class="login-view-section" id="login-view-section_intro-text">
+	{% include "login__header.html" %}
+	</div>
+	<div class="login-view-section login-form">
+		<div id="login-form">
+			<form action="/index" method="get" id="login_form">
+				<input class="login-input" type="email" id="login_email_address" placeholder="Email">
+				<input class="login-input" type="password" id="login_password" placeholder="Password">
+				<input class="login-form_button" type="submit" value="Sign in">
+			</form>
+		</div>
+		<div id="login-view_failed-login" style="display: none">Login Failed</div>
+		<div class="login-text" id="login-page_forgot-password-button" title="Forgot your password"><a href="/pw-reset">Forgot your password?</a></div>
+	</div>
+	{% if signup_enabled %}
+	<div id="create-account-section" class="login-view-section login-form">
+		<div class="section-divider">or</div>
+		<a href="/signup">
+			<div class="login-form_button" id="login-page_create-account-button" title="Create Account">Create Account</div>
+		</a>
+	</div>
+	{% endif %}
+	<div class="login-view-section">
+		<div class="section-divider magenta-divider"><span class="contact-us-icon"></span></div>
+		<p class="login-text contact-us-text">Feel free to <a class="contact-us-link" href="mailto:contact@rhizi.com">contact us</a>,<br>we would love to hear your suggestions!</p>
+	</div>
+	<script src="/static/js/user_login.js" type="text/javascript"></script>
+</div>
+{% endblock %}
